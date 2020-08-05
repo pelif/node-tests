@@ -1,14 +1,18 @@
-var calcModule = require('../calc'); 
-var chai = require('chai')
-var expect = chai.expect; 
+const calcModule = require('./../calc'); 
+const chai = require('chai')
+const expect = chai.expect; 
 
 import sinon from 'sinon'; 
+
+chai.use(require('sinon-chai')); 
 
 
 describe('calc test sum', function() {
     it('should sum return 4', (done) => {
         let mock = sinon.mock(calcModule); 
+
         mock.expects('sum').yields(null, 4); 
+
         calcModule.sum(2,2, (err, result) => {
             mock.verify();
             mock.restore();
