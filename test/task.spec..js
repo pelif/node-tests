@@ -6,15 +6,14 @@ import Todo from './../models/task';
 const expect = chai.expect; 
 require('sinon-mongoose'); 
 
+chai.use(require('sinon-chai')); 
+
+
 describe('Tasks', () => {
     it('should create a new task', (done) => {
-        
-        let mock = sinon.mock(
-            new Todo({
-                name: 'Task Teste'
-            }) 
-        ); 
 
+        let objTodo = new Todo({ name: 'Tesk Teste'}); 
+        let mock = sinon.mock(objTodo); 
         let todo = mock.object; 
 
         mock.expects('save').yields(null, {
@@ -28,8 +27,8 @@ describe('Tasks', () => {
         todo.save((err, result) => {
             mock.verify(); 
             mock.restore();
-
-            expect(result.status).to.equal(true); 
+            var object = new Todo(); 
+            expect(result.status).to.equal(true);             
             expect(result.data).to.be.an(object); 
             done();
         });
