@@ -19,6 +19,7 @@ mongoose.connect('mongodb://172.17.0.3/unit_tests', {
 }); 
 
 app.post('/tasks', task.create); 
+app.delete('/tasks/:id', task.remove);
 app.get('/', (req, res) => {
     res.send('my route'); 
 }); 
